@@ -20,7 +20,8 @@ public class FormFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JRadioButton rdbtnMadame, rdbtnMonsieur;
+	private JRadioButton rdbtnMadame;
+	private JRadioButton rdbtnMonsieur;
 	private JTextField txtNom;
 	private JTextField txtPrenom;
 	private JTextField txtAdresse;
