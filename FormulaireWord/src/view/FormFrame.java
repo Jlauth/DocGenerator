@@ -10,81 +10,127 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
-import com.toedter.calendar.JDayChooser;
-import java.util.regex.*;
+import controller.Control;
+import com.toedter.calendar.JDateChooser;
 
 
 public class FormFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JRadioButton rdbtnMadame, rdbtnMonsieur;
 	private JTextField txtNom;
 	private JTextField txtPrenom;
 	private JTextField txtAdresse;
-	private JTextField txtFacture;
 	private JTextField txtCodePostal;
-	JLabel label;
-
+	private JTextField txtFacture;
+	private JDateChooser dateChooser;
+	private JLabel label;
+	
+	private Control control;	
 	/**
-	 * Creaation du frame
+	 * clic sur le bouton valider
+	 * récupération des données présentes dans le Frame
 	 */
-	public FormFrame() {
+	public void valider() {
+	}
+	
+	/**
+	 * clic sur le bouton effacer
+	 */
+	public void effacer() {
+		txtNom.setText("");
+		txtPrenom.setText("");
+		txtAdresse.setText("");
+		txtCodePostal.setText("");
+		txtFacture.setText("");	
+	}
+	
+	/**
+	 * clic sur le bouton quitter
+	 */
+	public void quitter() {
+		System.exit(0);
+	}
+	
+	/**
+	 * Creation du frame
+	 */
+	public FormFrame(Control control) {
+		
+		// instance de Control
+		this.control = control;
+		
+		// initialisation du JPanel
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 525, 420);
+		setBounds(100, 100, 525, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNom = new JLabel("Nom");
-		lblNom.setBounds(47, 61, 46, 14);
-		contentPane.add(lblNom);
 		
-		JLabel lblPrenom = new JLabel("Prénom");
-		lblPrenom.setBounds(47, 92, 46, 14);
-		contentPane.add(lblPrenom);
+		// boutons Titre + label
+		JRadioButton rdbtnMadame = new JRadioButton("Madame");
+		rdbtnMadame.setBounds(146, 23, 93, 23);
+		contentPane.add(rdbtnMadame);
 		
-		JLabel lblAdresse = new JLabel("Adresse");
-		lblAdresse.setBounds(47, 122, 72, 14);
-		contentPane.add(lblAdresse);
-		
-		JLabel lblFacture = new JLabel("Montant facture");
-		lblFacture.setBounds(47, 185, 90, 14);
-		contentPane.add(lblFacture);
+		JRadioButton rdbtnMonsieur = new JRadioButton("Monsieur");
+		rdbtnMonsieur.setBounds(240, 23, 100, 23);
+		contentPane.add(rdbtnMonsieur);
 		
 		JLabel lblIdClient = new JLabel("Titre");
 		lblIdClient.setBounds(47, 27, 46, 14);
 		contentPane.add(lblIdClient);
+			
+		
+		// JTextField + label nom
+		JLabel lblNom = new JLabel("Nom");
+		lblNom.setBounds(47, 61, 46, 14);
+		contentPane.add(lblNom);
 		
 		txtNom = new JTextField();
 		txtNom.setColumns(10);
 		txtNom.setBounds(147, 58, 170, 20);
 		contentPane.add(txtNom);
-		txtNom.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-				if ((c == KeyEvent.VK_BACK_SPACE) ||
-				(c == KeyEvent.VK_DELETE)) {
-					getToolkit().beep();
-					e.consume();
-				}
-			}
-		});
+		
+		
+		// JTextField + label prénom
+		JLabel lblPrenom = new JLabel("Prénom");
+		lblPrenom.setBounds(47, 92, 46, 14);
+		contentPane.add(lblPrenom);
 		
 		txtPrenom = new JTextField();
 		txtPrenom.setColumns(10);
 		txtPrenom.setBounds(147, 89, 170, 20);
 		contentPane.add(txtPrenom);
+	
 		
+		// JTextField + label adresse
 		txtAdresse = new JTextField();
 		txtAdresse.setColumns(10);
 		txtAdresse.setBounds(147, 120, 170, 20);
 		contentPane.add(txtAdresse);
 		
+		JLabel lblAdresse = new JLabel("Adresse");
+		lblAdresse.setBounds(47, 122, 72, 14);
+		contentPane.add(lblAdresse);
+		
+
+		// JTextField + label ville/CP
+		txtCodePostal = new JTextField();
+		txtCodePostal.setBounds(147, 151, 170, 20);
+		contentPane.add(txtCodePostal);
+		txtCodePostal.setColumns(10);
+		
+		JLabel lblVille = new JLabel("CP / Ville");
+		lblVille.setBounds(47, 154, 90, 14);
+		contentPane.add(lblVille);
+		
+		
+		// JTexteField + label facture & devise
 		txtFacture = new JTextField();
 		txtFacture.setColumns(10);
 		txtFacture.setBounds(147, 182, 170, 20);
@@ -99,49 +145,60 @@ public class FormFrame extends JFrame {
 				}
 			}
 		});
+		JLabel lblFacture = new JLabel("Montant facture");
+		lblFacture.setBounds(47, 185, 90, 14);
+		contentPane.add(lblFacture);
 		
+		JLabel devise = new JLabel("€");
+		devise.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		devise.setBounds(327, 184, 14, 14);
+		contentPane.add(devise);
+		
+		
+		// JDateChooser + label date
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(147, 213, 170, 20);
+		contentPane.add(dateChooser);
+	
+		JLabel datefacture = new JLabel("Date facture");
+		datefacture.setBounds(47, 217, 72, 14);
+		contentPane.add(datefacture);
+		
+		
+		// bouton valider
 		JButton btnValider = new JButton("Valider");
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				valider();				
 			}
 		});
 		btnValider.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnValider.setBounds(364, 49, 130, 35);
 		contentPane.add(btnValider);
 		
+		
+		// bouton effacer
 		JButton btnEffacer = new JButton("Effacer");
+		btnEffacer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				effacer();
+			}
+		});
 		btnEffacer.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEffacer.setBounds(364, 97, 130, 35);
 		contentPane.add(btnEffacer);
 		
+		
+		// bouton quitter
 		JButton btnQuitter = new JButton("Quitter");
+		btnQuitter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				quitter();
+			}
+		});
 		btnQuitter.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnQuitter.setBounds(364, 311, 130, 35);
+		btnQuitter.setBounds(364, 205, 130, 35);
 		contentPane.add(btnQuitter);
-		
-		JLabel lblNewLabel = new JLabel("Code postal / Ville");
-		lblNewLabel.setBounds(47, 154, 90, 14);
-		contentPane.add(lblNewLabel);
-		
-		txtCodePostal = new JTextField();
-		txtCodePostal.setBounds(147, 151, 170, 20);
-		contentPane.add(txtCodePostal);
-		txtCodePostal.setColumns(10);
-		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Madame");
-		rdbtnNewRadioButton.setBounds(146, 23, 93, 23);
-		contentPane.add(rdbtnNewRadioButton);
-		
-		JRadioButton rdbtnMonsieur = new JRadioButton("Monsieur");
-		rdbtnMonsieur.setBounds(240, 23, 100, 23);
-		contentPane.add(rdbtnMonsieur);
-		
-		JLabel lblNewLabel_1 = new JLabel("Date facture");
-		lblNewLabel_1.setBounds(47, 217, 72, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JDayChooser dayChooser = new JDayChooser();
-		dayChooser.setBounds(147, 213, 170, 133);
-		contentPane.add(dayChooser);
+				
 	}
 }
