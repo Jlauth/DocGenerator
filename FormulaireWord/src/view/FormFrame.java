@@ -12,40 +12,51 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
-import controller.Control;
 import com.toedter.calendar.JDateChooser;
+
+import model.Doc;
 
 
 public class FormFrame extends JFrame {
 
+	/**
+	 * propriétés de FormFrame 
+	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JRadioButton rdbtnMadame;
-	private JRadioButton rdbtnMonsieur;
 	private JTextField txtNom;
 	private JTextField txtPrenom;
 	private JTextField txtAdresse;
-	private JTextField txtCodePostal;
+	private JTextField txtVille;
 	private JTextField txtFacture;
-	private JDateChooser dateChooser;
-	private JLabel label;
-	
-	private Control control;	
+	private Doc doc;
+		
 	/**
 	 * clic sur le bouton valider
 	 * récupération des données présentes dans le Frame
+	 * initialisation du document avec les données 
 	 */
 	public void valider() {
+		// constructeur 
+		this.doc = new Doc();
+		// importation des données renseignées
+		String nom = txtNom.getText();
+		String prenom = txtPrenom.getText();
+		// lecture des données renseignées
+		System.out.println(nom + " " + prenom);
+		// initialisation de la sauvegarde
+		doc.sauvegarde();
 	}
 	
 	/**
 	 * clic sur le bouton effacer
+	 * réinitialisation des champs
 	 */
 	public void effacer() {
 		txtNom.setText("");
 		txtPrenom.setText("");
 		txtAdresse.setText("");
-		txtCodePostal.setText("");
+		txtVille.setText("");
 		txtFacture.setText("");	
 	}
 	
@@ -59,10 +70,8 @@ public class FormFrame extends JFrame {
 	/**
 	 * Creation du frame
 	 */
-	public FormFrame(Control control) {
-		
-		// instance de Control
-		this.control = control;
+	public FormFrame() {
+
 		
 		// initialisation du JPanel
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,13 +129,13 @@ public class FormFrame extends JFrame {
 		contentPane.add(lblAdresse);
 		
 
-		// JTextField + label ville/CP
-		txtCodePostal = new JTextField();
-		txtCodePostal.setBounds(147, 151, 170, 20);
-		contentPane.add(txtCodePostal);
-		txtCodePostal.setColumns(10);
+		// JTextField + label ville
+		txtVille = new JTextField();
+		txtVille.setBounds(147, 151, 170, 20);
+		contentPane.add(txtVille);
+		txtVille.setColumns(10);
 		
-		JLabel lblVille = new JLabel("CP / Ville");
+		JLabel lblVille = new JLabel("Ville");
 		lblVille.setBounds(47, 154, 90, 14);
 		contentPane.add(lblVille);
 		

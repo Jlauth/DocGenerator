@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-import controller.Control;
+import view.FormFrame;
 
 /**
  * Classe Client, paramètres associés et getters/setters 
@@ -18,22 +18,13 @@ public class Client {
 	private String ville;
 	private float montant;
 	private Date date;
-	// constructeur du control
-	public Client(Control control) {
-	}
-
-	// constructeur de l'identité
-	public void ID(String titre, String nom, String prenom) {
-		this.titre = titre;
-		this.nom = nom;
-		this.prenom = prenom;
-	}
-	 
+	
 	/**
-	 * getter titre
-	 * @return
-	 */
+	* getter titre
+	* @return
+	*/
 	public String getTitre() {
+		new FormFrame();
 		return this.titre;
 	}
 	
@@ -47,6 +38,7 @@ public class Client {
 	 * @return
 	 */
 	public String getNom() {
+		new FormFrame();
 		return this.nom;
 	}
 	
@@ -59,6 +51,7 @@ public class Client {
 	 * @return
 	 */
 	public String getPrenom() {
+		new FormFrame();
 		return this.prenom;
 	}
 	
@@ -71,6 +64,7 @@ public class Client {
 	 * @return
 	 */
 	public String getAdresse() {
+		new FormFrame();
 		return this.adresse;
 	}
 	
@@ -83,6 +77,7 @@ public class Client {
 	 * @return
 	 */
 	public String getVille() {
+		new FormFrame();
 		return this.ville;
 	}
 	
@@ -95,6 +90,7 @@ public class Client {
 	 * @return
 	 */
 	public float getMontant() {
+		new FormFrame();
 		return this.montant;
 	}
 	
@@ -107,6 +103,7 @@ public class Client {
 	 * @return
 	 */
 	public Date getDate() {
+		new FormFrame();
 		return this.date;
 	}
 	public void setDate(Date date) {
@@ -114,3 +111,5 @@ public class Client {
 	}
 	
 }
+
+	

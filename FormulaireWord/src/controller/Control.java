@@ -1,12 +1,13 @@
 package controller;
 
+import model.Client;
+import model.Doc;
 import view.FormFrame;
 
 public class Control {
 
-	// propriétés
+	// déclaration des variables du model et view
 	private FormFrame formFrame;
-	
 	/**
 	 * Méthode de démarrage
 	 * @param args
@@ -19,7 +20,10 @@ public class Control {
 	 * Constructeur
 	 */
 	public Control () {
-		formFrame = new FormFrame(this);
+		this.formFrame = new FormFrame();
+		new Client();
+		new Doc();
+		
 		formFrame.setVisible(true);
 
 	}
