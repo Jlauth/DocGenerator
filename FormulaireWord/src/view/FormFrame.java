@@ -30,7 +30,8 @@ public class FormFrame extends JFrame {
 	private JTextField txtVille;
 	private JTextField txtFacture;
 	private Doc doc;
-		
+	
+	
 	/**
 	 * clic sur le bouton valider
 	 * récupération des données présentes dans le Frame
@@ -38,12 +39,14 @@ public class FormFrame extends JFrame {
 	 */
 	public void valider() {
 		// constructeur 
-		this.doc = new Doc();
+		this.doc = new Doc(null);
 		// importation des données renseignées
 		String nom = txtNom.getText();
 		String prenom = txtPrenom.getText();
 		// lecture des données renseignées
 		System.out.println(nom + " " + prenom);
+		// exportation des données renseignées vers le Doc
+		
 		// initialisation de la sauvegarde
 		doc.sauvegarde();
 	}
@@ -176,15 +179,15 @@ public class FormFrame extends JFrame {
 		
 		
 		// bouton valider
-		JButton btnValider = new JButton("Valider");
-		btnValider.addActionListener(new ActionListener() {
+		JButton btnEnregistrer = new JButton("Enregistrer");
+		btnEnregistrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				valider();				
 			}
 		});
-		btnValider.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnValider.setBounds(364, 49, 130, 35);
-		contentPane.add(btnValider);
+		btnEnregistrer.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnEnregistrer.setBounds(364, 49, 130, 35);
+		contentPane.add(btnEnregistrer);
 		
 		
 		// bouton effacer
